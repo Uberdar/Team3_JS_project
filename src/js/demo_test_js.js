@@ -16,9 +16,9 @@ async function DEMO_TRANDING_MOVIES() {
   //некоторые могут быть заполнены, а некоторые пустые , нужны проверки.
   const container = document.getElementById('pagination');
 const options = { // below default value of options
-     totalItems: 10,
-     itemsPerPage: 9,
-     visiblePages: 10,
+     totalItems: demox.total_results,
+     itemsPerPage: 20,
+     visiblePages: 5,
      page: demox.page,
      centerAlign: false,
      firstItemClassName: 'tui-first-child',
