@@ -18,12 +18,12 @@ const genresArr = [];
 async function DEMO_GET_GENRES() {
   const demoxGenres = await ClassInstance.GetGenres();
   const demoxGenres_genres = demoxGenres.genres;
-  console.log(demoxGenres_genres);
+  // console.log(demoxGenres_genres);
   return genresArr.push(...demoxGenres_genres);
 }
 DEMO_GET_GENRES();
 
-console.log(genresArr);
+// console.log(genresArr);
 
 function getStringGenres(genresArr, genre_ids) {
   genresArr.forEach(element => {
@@ -64,10 +64,11 @@ function makeMarkup(cards) {
         release_date,
         genre_ids,
         vote_average,
+        id,
       }) => {
         const date = new Date(release_date);
         return (cards = `
-            <li class="movie-card gallery_item">
+            <li class="movie-card gallery_item" data-id="${id}">
               <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${
           title || original_title || name || original_name
         }" loading="lazy" class="movie-card__img"/>
