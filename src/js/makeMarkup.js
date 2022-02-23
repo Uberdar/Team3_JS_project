@@ -15,10 +15,12 @@ if (genresArr.length === 0) {
 async function DEMO_GET_GENRES() {
   const demoxGenres = await ClassInstance.GetGenres();
   const demoxGenres_genres = demoxGenres.genres;
+
   saveOnLocalStorag(LOCALSTORAGE_KEY, demoxGenres_genres);
-  console.log(demoxGenres_genres);
+  //console.log(demoxGenres_genres);
   return genresArr.push(...demoxGenres_genres);
 }
+
 
 async function DEMO_TRANDING_MOVIES() {
   //асинхронная функция для работы с промисами
@@ -52,6 +54,7 @@ function makeMarkup(cards) {
         release_date,
         genre_ids,
         vote_average,
+        id,
       }) => {
         const date = new Date(release_date);
         const positiveGenres = genresArr.filter(itemArr => {
@@ -62,7 +65,7 @@ function makeMarkup(cards) {
         }, '');
         const finalRating = vote_average.toString().padEnd(3, '.0');
         return (cards = `
-            <li class="movie-card gallery_item">
+            <li class="movie-card gallery_item" data-id="${id}">
               <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${
           title || original_title || name || original_name
         }" loading="lazy" class="movie-card__img"/>

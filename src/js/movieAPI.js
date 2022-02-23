@@ -7,7 +7,7 @@ export default class APIQuery {
     }
     async TrandingMovies(){
         try {
-            const projAPI = await fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${this.API_KEY}`);
+            const projAPI = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${this.API_KEY}`);
             const projAPI_JSONED = await projAPI.json();
             // console.log(projAPI_JSONED);
             return projAPI_JSONED;
@@ -54,10 +54,10 @@ export default class APIQuery {
     set query(newQuery){
         this.searchMovieNameVariable = newQuery;
     }
-    get movieid(){
+    get movieId(){
         return this.movie_id;
     }
-    set movieid(newId){
+    set movieId(newId){
         this.movie_id = newId;
     }
     
