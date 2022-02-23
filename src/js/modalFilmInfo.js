@@ -14,37 +14,40 @@ async function getMovie(e) {
 
   if (card) {
     const cardId = card.dataset.id;
+
     apiById.movieId = cardId;
     const movieById = await apiById.DetailedMovieInfo(cardId);
     sessionStorage.setItem('currentMovie', JSON.stringify(movieById));
+    console.log(cardId);
 
     modalFilmInfo.classList.remove('goodby_modal');
     renderModalFilmInfo(movieById);
+    checkLocalStorage(Number(cardId));
   }
 }
 
 function renderModalFilmInfo(res) {
-  // checkLocalStorage(res.id);
   modalFilmInfo.insertAdjacentHTML('beforeend', movieInfohbs(res));
 
   const element = modalFilmInfo.querySelector('.backdrop_genres');
   const element1 = element.textContent.slice(0, -26);
-  console.log(element1.length);
   element.textContent = element1;
 }
 
 function checkLocalStorage(id) {
-  // const { id } = JSON.parse(sessionStorage.getItem('currentMovie'));
-
   const checkStorage = JSON.parse(localStorage.getItem(`watched`)) || [];
-  const selectBtn = modalFilmInfo.querySelector(`button[data-action="watched"]`);
-  console.log(modalFilmInfo);
 
-  if (!checkStorage.includes(id)) {
-    selectBtn.textContent = `REMOVE FROM WATCHED`;
+  const idsCheckStorage = checkStorage.map(item => item.id);
+  const selectBtn = modalFilmInfo.querySelector(`button[data-action="watched"]`);
+
+  if (!idsCheckStorage.includes(id)) {
+    selectBtn.textContent = `ADD TO WATCHED`;
+    console.log('Not includet');
     return;
   }
-  selectBtn.textContent = `ADD TO WATCHED`;
+  console.log('Includet');
+
+  selectBtn.textContent = `REMOVE FROM WATCHED`;
 }
 
 function addToList(e) {
