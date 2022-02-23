@@ -40,7 +40,7 @@ async function DEMO_TRANDING_MOVIES() {
   const demox_results = demox.results; // делаем выборку из обьекта который получился выше
   // console.log('demox_results: ', demox_results); // смотрим что получилось
 
-  demox_results.map(x => console.log('Trending_results:', x.original_name, x.title, x.id));
+  // demox_results.map(x => console.log('Trending_results:', x.original_name, x.title, x.id));
 
   gallery.innerHTML = makeMarkup(demox_results);
 

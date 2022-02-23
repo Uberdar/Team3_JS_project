@@ -54,10 +54,10 @@ export default class APIQuery {
     set query(newQuery){
         this.searchMovieNameVariable = newQuery;
     }
-    get movieid(){
+    get movieId(){
         return this.movie_id;
     }
-    set movieid(newId){
+    set movieId(newId){
         this.movie_id = newId;
     }
     
