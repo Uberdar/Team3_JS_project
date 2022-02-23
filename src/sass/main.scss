@@ -4,4 +4,7 @@
  */
 
 // Стили для файла с примером HTML-фрагмента
+@import './mixins';
+@import './common';
 @import './example';
+@import './main-page-cards';
