@@ -1,0 +1,44 @@
+<div class="backdrop_modal" style="background-color: gray;">
+        <p class="backdrop_close">
+            <button type="button" data-action="closeBackdrop">X</button>
+        </p>
+        <div class="backdrop_content">
+            <div class="backdrop_image">
+                <img src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="">
+            </div>
+            <div class="backdrop_modal__description">
+
+                <h1>{{title}}</h1>
+                <div class="backdrop_modal__info">
+                    <ul>
+                        <li>Vote / votes</li>
+                        <li>Popularity</li>
+                        <li>Original Title</li>
+                        <li>Genre</li>
+                    </ul>
+                    <ul>
+                        <li><span>{{vote_average}}</span> / {{vote_count}}</li>
+                        <li>{{popularity}}</li>
+                        <li>{{original_title}}</li>
+                        <li class="backdrop_genres">
+                        {{#each genres}}
+                            {{this.name}},
+                        {{/each}}
+                        </li>
+                    </ul>
+                </div>
+                <p>About</p>
+                <p>{{overview}}</p>
+                
+                <div class="backdrop_modal__buttons">
+                    <button type="button" data-action='watched'>
+                        ADD TO WATCHED
+                    </button>
+                    <button type="button" data-action='queue'>
+                        ADD TO QUEUE
+                    </button>
+                </div>
+                <button type="button" data-action="clear">Clear</button>
+            </div>
+        </div>
+    </div>
