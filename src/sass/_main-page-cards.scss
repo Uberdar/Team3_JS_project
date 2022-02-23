@@ -49,9 +49,6 @@ p {
   display: block;
   height: 398px;
   object-fit: cover;
-
-  margin-bottom: 10px;
-
   border-radius: 5px;
   background-image: linear-gradient(rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4));
 }
@@ -85,7 +82,7 @@ p {
 
 .card__rating--text {
   color: #ffffff;
-  line-height: 14px;
+  line-height: calc(14 / 12);
   text-align: center;
   margin: 0;
 }

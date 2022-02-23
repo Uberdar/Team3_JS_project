@@ -1,35 +1,23 @@
 import DEMO from './movieAPI';
+import { saveOnLocalStorag, getOnLocalStorage } from './local_storag';
 const ClassInstance = new DEMO(); //создаем екземпляр класса
 
 const gallery = document.querySelector('.gallery');
 
-// const LOCALSTORAGE_KEY = 'genres-kod';
-// const load = () => {
-//   try {
-//     const serializedState = localStorage.getItem(LOCALSTORAGE_KEY);
-//     return (serializedState = JSON.parse(serializedState));
-//   } catch (error) {
-//     DEMO_GET_GENRES();
-//   }
-// };
+const LOCALSTORAGE_KEY = 'genres-kod';
 
-const genresArr = [];
+const genresArr = getOnLocalStorage(LOCALSTORAGE_KEY) || [];
+console.log(genresArr);
+if (genresArr.length === 0) {
+  DEMO_GET_GENRES();
+}
 
 async function DEMO_GET_GENRES() {
   const demoxGenres = await ClassInstance.GetGenres();
   const demoxGenres_genres = demoxGenres.genres;
+  saveOnLocalStorag(LOCALSTORAGE_KEY, demoxGenres_genres);
   console.log(demoxGenres_genres);
   return genresArr.push(...demoxGenres_genres);
-}
-DEMO_GET_GENRES();
-
-console.log(genresArr);
-
-function getStringGenres(genresArr, genre_ids) {
-  genresArr.forEach(element => {
-    if (genre_ids !== element.id) return;
-    stringGenres = element.name;
-  });
 }
 
 async function DEMO_TRANDING_MOVIES() {
@@ -40,7 +28,7 @@ async function DEMO_TRANDING_MOVIES() {
   const demox_results = demox.results; // делаем выборку из обьекта который получился выше
   // console.log('demox_results: ', demox_results); // смотрим что получилось
 
-  demox_results.map(x => console.log('Trending_results:', x.original_name, x.title, x.id));
+  // demox_results.map(x => console.log('Trending_results:', x.original_name, x.title, x.id));
 
   gallery.innerHTML = makeMarkup(demox_results);
 
@@ -66,6 +54,13 @@ function makeMarkup(cards) {
         vote_average,
       }) => {
         const date = new Date(release_date);
+        const positiveGenres = genresArr.filter(itemArr => {
+          return genre_ids.includes(itemArr.id);
+        });
+        const finalGanresString = positiveGenres.reduce((positiveGenres, item) => {
+          return positiveGenres + ' ' + item.name;
+        }, '');
+        const finalRating = vote_average.toString().padEnd(3, '.0');
         return (cards = `
             <li class="movie-card gallery_item">
               <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${
@@ -77,11 +72,13 @@ function makeMarkup(cards) {
                     title || original_title || name || original_name
                   }
                   </p>
-                  <p class="movie-card__info-item">${genre_ids} | ${date.getFullYear() || ''}
+                  <p class="movie-card__info-item">${finalGanresString} | ${
+          date.getFullYear() || ''
+        }
                   </p>
                 </div>
                 <div class="card__rating">
-                  <p class="card__text card__rating--text">${vote_average}</p>
+                  <p class="card__text card__rating--text">${finalRating}</p>
                 </div>
               </div>
             </li>
