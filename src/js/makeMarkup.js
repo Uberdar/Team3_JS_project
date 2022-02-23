@@ -6,12 +6,12 @@ const gallery = document.querySelector('.gallery');
 async function DEMO_TRANDING_MOVIES() {
   //асинхронная функция для работы с промисами
   const demox = await ClassInstance.TrandingMovies(); //присваиваем промис TrandingMovies() константе
-  console.log('demox: ', demox); // смотрим что получилось
+  // console.log('demox: ', demox); // смотрим что получилось
 
   const demox_results = demox.results; // делаем выборку из обьекта который получился выше
-  console.log('demox_results: ', demox_results); // смотрим что получилось
+  // console.log('demox_results: ', demox_results); // смотрим что получилось
 
-  demox_results.map(x => console.log('Trending_results:', x.original_name, x.title, x.id));
+  // demox_results.map(x => console.log('Trending_results:', x.original_name, x.title, x.id));
 
   gallery.innerHTML = makeMarkup(demox_results);
 
@@ -25,9 +25,9 @@ DEMO_TRANDING_MOVIES();
 
 function makeMarkup(cards) {
   return cards
-    .map(({ title, poster_path, release_date, genre_ids }) => {
+    .map(({ id, title, poster_path, release_date, genre_ids }) => {
       return (cards = `
-            <a class="movie-card" href="">
+        <div class='gallery_item' data-id='${id}'>
               <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${title}" loading="lazy" class="movie-card__img"/>
               <div class="movie-card__info">
                 <p class="movie-card__info-name">
@@ -37,7 +37,7 @@ function makeMarkup(cards) {
                   ${genre_ids} | ${release_date}
                 </p>
               </div>
-            </a>
+        </div>
           `);
     })
     .join('');
