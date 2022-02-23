@@ -40,6 +40,11 @@ export default class APIQuery {
             console.log(error);
         }
     }
+    async GetGenres(){
+        const genre_api = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${this.API_KEY}&language=en-US`);
+        const jsoned_genre_api = await genre_api.json();
+        return jsoned_genre_api;
+    }
     resetPage(){
         this.page = 1;
     }
