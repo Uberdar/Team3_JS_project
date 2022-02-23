@@ -36,6 +36,7 @@ function renderModalFilmInfo(res) {
 
 function checkLocalStorage(id) {
   const checkStorage = JSON.parse(localStorage.getItem(`watched`)) || [];
+
   const idsCheckStorage = checkStorage.map(item => item.id);
   const selectBtn = modalFilmInfo.querySelector(`button[data-action="watched"]`);
 
