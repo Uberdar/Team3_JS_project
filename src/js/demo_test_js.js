@@ -46,7 +46,8 @@ async function DEMO_TRANDING_MOVIES() {
   
   
   const pagination = new Pagination(container, options);
-  var spinner = new Spinner(opts).stop(target);
+  var target = document.getElementById('testspinner');
+  var spinner = new Spinner(opts).spin(target);
   var opts = {
     lines: 13, // The number of lines to draw
     length: 80, // The length of each line
@@ -94,11 +95,20 @@ async function testfun(event){
     document.querySelector(".gallery").innerHTML = markup(testvar.results);
 
 }
-  pagination.on("afterMove", function spinnerf(){
+  pagination.on("afterMove", (event) => {
+        const { page } = event;
+        spinner.spin(target);
+        /* тут делаешь запрос */
+        // fetch(`https://some-site.com/products?page=${page}`)
+        console.log(page);
+      });
+  
+  
+//   function spinnerf(){
+//     spinner.spin(target);
+//   }
 
-  }
-
-  );
+//   );
 //   demox_results.map(x => console.log('Trending_results:', x.original_name, x.title, x.id));
 }
 DEMO_TRANDING_MOVIES(); // инициируем функцию чтоб все выше описанное выполнилось
@@ -125,22 +135,22 @@ DEMO_TRANDING_MOVIES(); // инициируем функцию чтоб все �
 
 
 
-const x = debounce(() => {
+// const x = debounce(() => {
 
-    // document.getElementById("poster").style.display="block";
-    // return DETAILED_INFO_MOVIES();
-}, 1500);
+//     // document.getElementById("poster").style.display="block";
+//     // return DETAILED_INFO_MOVIES();
+// }, 1500);
 
 
-debounce(test(), 500)
+// debounce(test(), 500)
 // var target = document.getElementById('testspinner');
 
 
-function test(){
-    spinner.spin(target);
-    x();
+// function test(){
+//     Spinner.spin(target);
+//     x();
 
-}
+// }
 
 
 // async function DEMO_SEARCH_MOVIES() {
