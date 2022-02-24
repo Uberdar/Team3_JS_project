@@ -1,4 +1,4 @@
-<div class="backdrop_modal" style="background-color: gray;">
+<div class="backdrop_modal">
         <p class="backdrop_close">
             <button type="button" data-action="closeBackdrop">X</button>
         </p>
@@ -8,18 +8,18 @@
             </div>
             <div class="backdrop_modal__description">
 
-                <h1>{{title}}</h1>
+                <h1 class="backdrop_modal__title">{{title}}</h1>
                 <div class="backdrop_modal__info">
-                    <ul>
+                    <ul class="backdrop_modal__list">
                         <li>Vote / votes</li>
                         <li>Popularity</li>
                         <li>Original Title</li>
                         <li>Genre</li>
                     </ul>
-                    <ul>
-                        <li><span>{{vote_average}}</span> / {{vote_count}}</li>
-                        <li>{{popularity}}</li>
-                        <li>{{original_title}}</li>
+                    <ul class="backdrop_modal__list-desk">
+                        <li ><span>{{vote_average}}</span> / {{vote_count}}</li>
+                        <li >{{popularity}}</li>
+                        <li >{{original_title}}</li>
                         <li class="backdrop_genres">
                         {{#each genres}}
                             {{this.name}},
@@ -27,8 +27,8 @@
                         </li>
                     </ul>
                 </div>
-                <p>About</p>
-                <p>{{overview}}</p>
+                <p class="backdrop_modal__text">About</p>
+                <p class="backdrop-modal__desk-text">{{overview}}</p>
                 
                 <div class="backdrop_modal__buttons">
                     <button type="button" data-action='watched'>
