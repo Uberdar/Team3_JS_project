@@ -1,22 +1,17 @@
 import DEMO from './movieAPI';
-import Pagination from 'tui-pagination'; /* ES6 */
+import Pagination from 'tui-pagination'; 
 import markup from './makeMarkup';
 import {Spinner} from 'spin.js';
-var debounce = require('debounce'); //npm install debounce
-const ClassInstance = new DEMO(); //создаем екземпляр класса
+var debounce = require('debounce'); 
+const ClassInstance = new DEMO(); 
 
 
-
-
-// let pagesVar = 1;
 async function DEMO_TRANDING_MOVIES() {
 
-  const demox = await ClassInstance.TrandingMovies(); //присваиваем промис TrandingMovies() константе
-//   console.log('demox: ', demox); // смотрим что получилось
-//   const demox_results = demox.results; // делаем выборку из обьекта который получился выше
-//   console.log('demox_results: ', demox_results); // смотрим что получилось
+  const demox = await ClassInstance.TrandingMovies(); 
+
   const container = document.getElementById('pagination');
-  const options = { // below default value of options
+  const options = { 
        totalItems: demox.total_results,
        itemsPerPage: 20,
        visiblePages: 5,
@@ -69,108 +64,22 @@ async function DEMO_TRANDING_MOVIES() {
   };
   var spinner = new Spinner(opts).stop(target);
 
-//   pagination.on("afterMove", async function testfun(event){
-//       const { page } = event;
-//       ClassInstance.testpage = page;
-//       const testvar = await ClassInstance.GetParticularPage();
-//     //   console.log('testvar: ', testvar.results);
-//     //   console.log(page);
-//       // console.log(document.querySelector(".gallery"));
-//       document.querySelector(".gallery").innerHTML = '';
-//       document.querySelector(".gallery").innerHTML = markup(testvar.results);
-//   }
-//   );
-
 async function testfun(event){
     const { page } = event;
     ClassInstance.testpage = page;
     const testvar = await ClassInstance.GetParticularPage();
-  //   console.log('testvar: ', testvar.results);
-  //   console.log(page);
-    // console.log(document.querySelector(".gallery"));
     document.querySelector(".gallery").innerHTML = '';
     document.querySelector(".gallery").innerHTML = markup(testvar.results);
     spinner.stop(target);
-    console.log('its me MARIO!');
 
 }
 const x = debounce((event)=>{return testfun(event)}, 1500);
   pagination.on("afterMove", (event) => {
-        // const { page } = event;
         spinner.spin(target);
         x(event);
-        // debounce((event)=> {return testfun(event)} , 1500);
-        /* тут делаешь запрос */
-        // fetch(`https://some-site.com/products?page=${page}`)
-        // console.log(page);
       });
-  
-  
-//   function spinnerf(){
-//     spinner.spin(target);
-//   }
 
-//   );
-//   demox_results.map(x => console.log('Trending_results:', x.original_name, x.title, x.id));
 }
-DEMO_TRANDING_MOVIES(); // инициируем функцию чтоб все выше описанное выполнилось
+DEMO_TRANDING_MOVIES(); 
 
 
-
-// console.log('container: ', container.childNodes);
-// let xss = container.childNodes;
-// console.log('xss: ', xss);
-// xss.forEach(element => console.log(element));
-
-// let takepages = document.querySelector('tui-is-selected');
-// let takepagess = document.querySelector('tui-page-btn');
-// console.log('takepagess: ', takepagess);
-// console.log('takepages: ', takepages);
-
-// after move
-// pagination.on("afterMove", (event) => {
-//     const { page } = event;
-//     /* тут делаешь запрос */
-//     // fetch(`https://some-site.com/products?page=${page}`)
-//     console.log(page);
-//   });
-
-
-
-// const x = debounce(() => {
-
-//     // document.getElementById("poster").style.display="block";
-//     // return DETAILED_INFO_MOVIES();
-// }, 1500);
-
-
-// debounce(test(), 500)
-// var target = document.getElementById('testspinner');
-
-
-// function test(){
-//     Spinner.spin(target);
-//     x();
-
-// }
-
-
-// async function DEMO_SEARCH_MOVIES() {
-//   console.log('inside DEMO_SEARCH_MOVIES');
-//   let Query_Variable = (ClassInstance.query = 'pirate');
-//   console.log('Query_Variable: ', Query_Variable);
-//   const x = await ClassInstance.SearchMovie();
-//   console.log('x: ', x.results);
-//   const search_results = x.results;
-//   search_results.map(x => console.log('search_results: ', x.title));
-
-//   console.log('end DEMO_SEARCH_MOVIES');
-// }
-// DEMO_SEARCH_MOVIES();
-// 476669;
-// async function DETAILED_INFO_MOVIES() {
-//   ClassInstance.movieid = 476669;
-//   const demox = await ClassInstance.DetailedMovieInfo();
-//   console.log('INFO: ', demox);
-// }
-// DETAILED_INFO_MOVIES();
