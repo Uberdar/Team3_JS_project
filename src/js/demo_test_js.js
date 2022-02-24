@@ -2,11 +2,11 @@ import DEMO from './movieAPI';
 import Pagination from 'tui-pagination'; /* ES6 */
 import markup from './makeMarkup';
 import {Spinner} from 'spin.js';
-
+var debounce = require('debounce'); //npm install debounce
 const ClassInstance = new DEMO(); //создаем екземпляр класса
 
 
-var debounce = require('debounce'); //npm install debounce
+
 
 // let pagesVar = 1;
 async function DEMO_TRANDING_MOVIES() {
@@ -97,7 +97,8 @@ async function testfun(event){
   pagination.on("afterMove", (event) => {
         const { page } = event;
         spinner.spin(target);
-        debounce((event)=> {return testfun(event)} , 1500);
+        testfun(event);
+        // debounce((event)=> {return testfun(event)} , 1500);
         /* тут делаешь запрос */
         // fetch(`https://some-site.com/products?page=${page}`)
         console.log(page);
