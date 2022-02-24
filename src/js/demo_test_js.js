@@ -3,6 +3,10 @@ import Pagination from 'tui-pagination'; /* ES6 */
 import markup from './makeMarkup';
 import {Spinner} from 'spin.js';
 const ClassInstance = new DEMO(); //создаем екземпляр класса
+
+document.getElementById("poster").style.display="none";
+var debounce = require('debounce'); //npm install debounce
+
 let pagesVar = 1;
 async function DEMO_TRANDING_MOVIES() {
 
