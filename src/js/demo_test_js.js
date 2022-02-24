@@ -110,7 +110,7 @@ async function testfun(event){
     spinner.stop(target);
 
 }
-const x = debounce((event)=>{return testfun(event)}, 1500);
+const x = debounce((event)=>{return testfun(event)}, 500);
   pagination.on("afterMove", (event) => {
         spinner.spin(target);
         x(event);
