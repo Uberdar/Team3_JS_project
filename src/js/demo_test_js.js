@@ -85,6 +85,23 @@ pagination.on("afterMove", async function testfun(event){
 
 );
 
+const x = debounce(() => {
+    document.getElementById("poster").style.display="block";
+    return DETAILED_INFO_MOVIES();
+}, 1500);
+x();
+
+
+
+var target = document.getElementById('testspinner');
+var spinner = new Spinner(opts).stop(target);
+
+function test(){
+    spinner.spin(target);
+    x();
+
+}
+test();
 
 
 // async function DEMO_SEARCH_MOVIES() {
