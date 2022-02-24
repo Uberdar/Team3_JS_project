@@ -47,7 +47,6 @@ async function DEMO_TRANDING_MOVIES() {
   
   const pagination = new Pagination(container, options);
   var target = document.getElementById('testspinner');
-  var spinner = new Spinner(opts).spin(target);
   var opts = {
     lines: 13, // The number of lines to draw
     length: 80, // The length of each line
@@ -68,6 +67,8 @@ async function DEMO_TRANDING_MOVIES() {
     className: 'spinner', // The CSS class to assign to the spinner
     position: 'absolute', // Element positioning
   };
+  var spinner = new Spinner(opts).stop(target);
+
 //   pagination.on("afterMove", async function testfun(event){
 //       const { page } = event;
 //       ClassInstance.testpage = page;
@@ -79,11 +80,7 @@ async function DEMO_TRANDING_MOVIES() {
 //       document.querySelector(".gallery").innerHTML = markup(testvar.results);
 //   }
 //   );
-function test(event){
-    spinner.spin(target);
-    // testfun(event);
 
-}
 async function testfun(event){
     const { page } = event;
     ClassInstance.testpage = page;
@@ -93,11 +90,14 @@ async function testfun(event){
     // console.log(document.querySelector(".gallery"));
     document.querySelector(".gallery").innerHTML = '';
     document.querySelector(".gallery").innerHTML = markup(testvar.results);
+    // spinner.stop(target);
+    console.log('its me MARIO!');
 
 }
   pagination.on("afterMove", (event) => {
         const { page } = event;
         spinner.spin(target);
+        debounce((event)=> {return testfun(event)} , 1500);
         /* тут делаешь запрос */
         // fetch(`https://some-site.com/products?page=${page}`)
         console.log(page);
