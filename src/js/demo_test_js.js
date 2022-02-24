@@ -2,26 +2,7 @@ import DEMO from './movieAPI';
 import Pagination from 'tui-pagination'; /* ES6 */
 import markup from './makeMarkup';
 import {Spinner} from 'spin.js';
-var opts = {
-    lines: 13, // The number of lines to draw
-    length: 80, // The length of each line
-    width: 22, // The line thickness
-    radius: 70, // The radius of the inner circle
-    scale: 1.45, // Scales overall size of the spinner
-    corners: 1, // Corner roundness (0..1)
-    speed: 0.8, // Rounds per second
-    rotate: 0, // The rotation offset
-    animation: 'spinner-line-shrink', // The CSS animation name for the lines
-    direction: 1, // 1: clockwise, -1: counterclockwise
-    color: 'black', // CSS color or array of colors
-    fadeColor: 'transparent', // CSS color or array of colors
-    top: '49%', // Top position relative to parent
-    left: '50%', // Left position relative to parent
-    shadow: '0 0 1px transparent', // Box-shadow for the lines
-    zIndex: 2000000000, // The z-index (defaults to 2e9)
-    className: 'spinner', // The CSS class to assign to the spinner
-    position: 'absolute', // Element positioning
-  };
+
 const ClassInstance = new DEMO(); //создаем екземпляр класса
 
 
@@ -65,7 +46,27 @@ async function DEMO_TRANDING_MOVIES() {
   
   
   const pagination = new Pagination(container, options);
-  
+  var spinner = new Spinner(opts).stop(target);
+  var opts = {
+    lines: 13, // The number of lines to draw
+    length: 80, // The length of each line
+    width: 22, // The line thickness
+    radius: 70, // The radius of the inner circle
+    scale: 1.45, // Scales overall size of the spinner
+    corners: 1, // Corner roundness (0..1)
+    speed: 0.8, // Rounds per second
+    rotate: 0, // The rotation offset
+    animation: 'spinner-line-shrink', // The CSS animation name for the lines
+    direction: 1, // 1: clockwise, -1: counterclockwise
+    color: 'black', // CSS color or array of colors
+    fadeColor: 'transparent', // CSS color or array of colors
+    top: '49%', // Top position relative to parent
+    left: '50%', // Left position relative to parent
+    shadow: '0 0 1px transparent', // Box-shadow for the lines
+    zIndex: 2000000000, // The z-index (defaults to 2e9)
+    className: 'spinner', // The CSS class to assign to the spinner
+    position: 'absolute', // Element positioning
+  };
 //   pagination.on("afterMove", async function testfun(event){
 //       const { page } = event;
 //       ClassInstance.testpage = page;
@@ -79,7 +80,7 @@ async function DEMO_TRANDING_MOVIES() {
 //   );
 function test(event){
     spinner.spin(target);
-    testfun(event);
+    // testfun(event);
 
 }
 async function testfun(event){
@@ -93,7 +94,9 @@ async function testfun(event){
     document.querySelector(".gallery").innerHTML = markup(testvar.results);
 
 }
-  pagination.on("afterMove", debounce(test,1500)
+  pagination.on("afterMove", function spinnerf(){
+
+  }
 
   );
 //   demox_results.map(x => console.log('Trending_results:', x.original_name, x.title, x.id));
@@ -131,7 +134,7 @@ const x = debounce(() => {
 
 debounce(test(), 500)
 // var target = document.getElementById('testspinner');
-// var spinner = new Spinner(opts).stop(target);
+
 
 function test(){
     spinner.spin(target);
