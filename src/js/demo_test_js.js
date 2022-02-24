@@ -60,7 +60,7 @@ async function DEMO_TRANDING_MOVIES() {
     direction: 1, // 1: clockwise, -1: counterclockwise
     color: 'black', // CSS color or array of colors
     fadeColor: 'transparent', // CSS color or array of colors
-    top: '49%', // Top position relative to parent
+    top: '325%', // Top position relative to parent
     left: '50%', // Left position relative to parent
     shadow: '0 0 1px transparent', // Box-shadow for the lines
     zIndex: 2000000000, // The z-index (defaults to 2e9)
@@ -90,18 +90,19 @@ async function testfun(event){
     // console.log(document.querySelector(".gallery"));
     document.querySelector(".gallery").innerHTML = '';
     document.querySelector(".gallery").innerHTML = markup(testvar.results);
-    // spinner.stop(target);
+    spinner.stop(target);
     console.log('its me MARIO!');
 
 }
+const x = debounce((event)=>{return testfun(event)}, 1500);
   pagination.on("afterMove", (event) => {
-        const { page } = event;
+        // const { page } = event;
         spinner.spin(target);
-        testfun(event);
+        x(event);
         // debounce((event)=> {return testfun(event)} , 1500);
         /* тут делаешь запрос */
         // fetch(`https://some-site.com/products?page=${page}`)
-        console.log(page);
+        // console.log(page);
       });
   
   
