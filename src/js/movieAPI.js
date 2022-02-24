@@ -4,6 +4,7 @@ export default class APIQuery {
         this.page = 1;
         this.searchMovieNameVariable = 'snail';
         this.movie_id = '';
+        this.testvar = 1;
     }
     async TrandingMovies(){
         try {
@@ -45,6 +46,18 @@ export default class APIQuery {
         const jsoned_genre_api = await genre_api.json();
         return jsoned_genre_api;
     }
+    async GetParticularPage(){
+        try {
+            const projAPI = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${this.API_KEY}&page=${this.testvar}`);
+            const projAPI_JSONED = await projAPI.json();
+            // console.log(projAPI_JSONED);
+            return projAPI_JSONED;
+        }
+        catch (error){
+            console.log(error);
+        }
+
+    }
     resetPage(){
         this.page = 1;
     }
@@ -59,6 +72,12 @@ export default class APIQuery {
     }
     set movieId(newId){
         this.movie_id = newId;
+    }
+    get testpage(){
+        return this.testvar;
+    }
+    set testpage(newtest){
+        this.testvar = newtest;
     }
     
 }

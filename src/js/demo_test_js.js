@@ -1,28 +1,30 @@
 import DEMO from './movieAPI';
 import Pagination from 'tui-pagination'; /* ES6 */
+import markup from './makeMarkup';
 const ClassInstance = new DEMO(); //создаем екземпляр класса
+let pagesVar = 1;
 async function DEMO_TRANDING_MOVIES() {
-  //асинхронная функция для работы с промисами
+
   const demox = await ClassInstance.TrandingMovies(); //присваиваем промис TrandingMovies() константе
   console.log('demox: ', demox); // смотрим что получилось
-
   const demox_results = demox.results; // делаем выборку из обьекта который получился выше
   console.log('demox_results: ', demox_results); // смотрим что получилось
 
-  demox_results.map(x => console.log('Trending_results:', x.original_name, x.title, x.id));
-  // так как выше мы получили массив
-  //обьектов то переираем его с помощью функции .мар() для доступа ко всем свойствам обьекта
-  // (!)некоторые фильмы имеют разные строки для написания названия фильма (original_name/title/original_title)
-  //некоторые могут быть заполнены, а некоторые пустые , нужны проверки.
-  const container = document.getElementById('pagination');
+//   demox_results.map(x => console.log('Trending_results:', x.original_name, x.title, x.id));
+}
+DEMO_TRANDING_MOVIES(); // инициируем функцию чтоб все выше описанное выполнилось
+
+const container = document.getElementById('pagination');
+
 const options = { // below default value of options
-     totalItems: demox.total_results,
+     totalItems: 200,
      itemsPerPage: 20,
      visiblePages: 5,
-     page: demox.page,
+     page: 1,
      centerAlign: false,
      firstItemClassName: 'tui-first-child',
      lastItemClassName: 'tui-last-child',
+     usageStatistics:false,
      template: {
          page: '<a href="#" class="tui-page-btn">{{page}}</a>',
          currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
@@ -39,10 +41,47 @@ const options = { // below default value of options
                  '<span class="tui-ico-ellip">...</span>' +
              '</a>'
      }
+
 };
+
+
 const pagination = new Pagination(container, options);
+
+
+// console.log('container: ', container.childNodes);
+// let xss = container.childNodes;
+// console.log('xss: ', xss);
+// xss.forEach(element => console.log(element));
+
+// let takepages = document.querySelector('tui-is-selected');
+// let takepagess = document.querySelector('tui-page-btn');
+// console.log('takepagess: ', takepagess);
+// console.log('takepages: ', takepages);
+
+// after move
+// pagination.on("afterMove", (event) => {
+//     const { page } = event;
+//     /* тут делаешь запрос */
+//     // fetch(`https://some-site.com/products?page=${page}`)
+//     console.log(page);
+//   });
+
+pagination.on("afterMove", async function testfun(event){
+    const { page } = event;
+    ClassInstance.testpage = page;
+    const testvar = await ClassInstance.GetParticularPage();
+    console.log('testvar: ', testvar.results);
+    console.log(page);
+    // console.log(document.querySelector(".gallery"));
+    document.querySelector(".gallery").innerHTML = '';
+    document.querySelector(".gallery").innerHTML = markup(testvar.results);
+
 }
-DEMO_TRANDING_MOVIES(); // инициируем функцию чтоб все выше описанное выполнилось
+
+);
+
+
+
 // async function DEMO_SEARCH_MOVIES() {
 //   console.log('inside DEMO_SEARCH_MOVIES');
 //   let Query_Variable = (ClassInstance.query = 'pirate');
@@ -62,5 +101,3 @@ DEMO_TRANDING_MOVIES(); // инициируем функцию чтоб все �
 //   console.log('INFO: ', demox);
 // }
 // DETAILED_INFO_MOVIES();
-
-
